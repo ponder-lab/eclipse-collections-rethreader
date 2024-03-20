@@ -324,6 +324,7 @@ public class SerialParallelLazyPerformanceTest
     private void measureAlgorithmForIntegerIterable(String algorithmName, Procedure<Function0<FastList<Integer>>> algorithm, boolean shuffle)
     {
         this.printMachineAndTestConfiguration(algorithmName);
+        // NOTE: SHORTENING TEST
         for (int i = 0; i < 1; i++)
         {
             this.getSizes().forEach(Procedures.cast(count -> this.getIntegerListGenerators(count, shuffle).forEach(algorithm)));
@@ -350,6 +351,7 @@ public class SerialParallelLazyPerformanceTest
     private void measureAlgorithmForRandomStringIterable(String algorithmName, Procedure<Function0<UnifiedSet<String>>> algorithm)
     {
         this.printMachineAndTestConfiguration(algorithmName);
+        // NOTE: SHORTENING TEST
         for (int i = 0; i < 1; i++)
         {
             this.getSizes().forEach(Procedures.cast(count -> this.getRandomWordsGenerators(count).forEach(algorithm)));
