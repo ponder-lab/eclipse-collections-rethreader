@@ -86,7 +86,7 @@ public class ParallelMapIteratePutAcceptanceTest
         this.runAllPutTests(contents, constContents);
     }
     
-    @Param({"10", "50", "100", "500"})
+    @Param({"10", "50", "100", "500", "1000", "5000", "10000"})
     private int threads;
 
     private void runAllPutTests(Integer[] contents, Integer[] constContents)
