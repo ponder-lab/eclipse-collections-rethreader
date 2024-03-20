@@ -41,6 +41,7 @@ public class ParallelMapIteratePutAcceptanceTest
     private static final int CHUNK_SIZE = 16000;
 
     @After
+    @TearDown(Level.Trial)
     public void tearDown()
     {
         ParallelMapIteratePutAcceptanceTest.fullGc();
