@@ -41,9 +41,9 @@ public class ParallelUnsafeMapIteratePutAcceptanceTest
 
     private static final long PUT_REPEAT = 100;
     private static final int CHUNK_SIZE = 16000;
-    private static final int MAX_THREADS = 48;
 
     @After
+    @TearDown(Level.Trial)
     public void tearDown()
     {
         fullGc();
@@ -87,11 +87,13 @@ public class ParallelUnsafeMapIteratePutAcceptanceTest
         Collections.shuffle(Arrays.asList(contents), new Random(SEED));
         this.runAllPutTests(contents, constContents);
     }
+    
+    @Param({"10", "50", "100", "500"})
+    private int threads;
 
     private void runAllPutTests(Integer[] contents, Integer[] constContents)
     {
-        ExecutorService executorService = new ThreadPoolExecutor(MAX_THREADS, MAX_THREADS, 0, TimeUnit.SECONDS, new LinkedBlockingDeque<>(MAX_THREADS));
-        int threads = 10;
+        ExecutorService executorService = new ThreadPoolExecutor(threads, threads, 0, TimeUnit.SECONDS, new LinkedBlockingDeque<>(threads));
         this.runPutTest1(threads, contents, constContents, executorService, false);
         executorService.shutdown();
     }

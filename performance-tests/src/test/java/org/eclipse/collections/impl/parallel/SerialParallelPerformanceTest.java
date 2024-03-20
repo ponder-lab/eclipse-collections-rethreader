@@ -218,6 +218,7 @@ public class SerialParallelPerformanceTest
             Procedure<Function0<Iterable<Integer>>> algorithm)
     {
         this.printMachineAndTestConfiguration(algorithmName);
+        // NOTE: SHORTENING TEST
         for (int i = 0; i < 1; i++)
         {
             this.getSizes().forEach(Procedures.cast(count -> this.getIntegerListGenerators(count).forEach(algorithm)));
@@ -235,7 +236,7 @@ public class SerialParallelPerformanceTest
             Procedure<Function0<Iterable<String>>> algorithm)
     {
         this.printMachineAndTestConfiguration(algorithmName);
-        // How many times to run tests. Was originally 4; shortened to 1
+        // NOTE: SHORTENING TEST
         for (int i = 0; i < 1; i++)
         {
             this.getSizes().forEach(Procedures.cast(count -> this.getRandomWordsGenerators(count).forEach(algorithm)));

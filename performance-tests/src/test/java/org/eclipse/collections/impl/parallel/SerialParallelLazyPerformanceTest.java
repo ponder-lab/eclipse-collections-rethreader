@@ -125,9 +125,9 @@ public class SerialParallelLazyPerformanceTest
 
     private static final int SCALE_FACTOR = Integer.parseInt(System.getProperty("scaleFactor", "100"));
 
-    private static final int WARM_UP_COUNT = Integer.parseInt(System.getProperty("WarmupCount", "5"));
-    private static final int PARALLEL_RUN_COUNT = Integer.parseInt(System.getProperty("ParallelRunCount", "10"));
-    private static final int SERIAL_RUN_COUNT = Integer.parseInt(System.getProperty("SerialRunCount", "10"));
+    private static final int WARM_UP_COUNT = Integer.parseInt(System.getProperty("WarmupCount", "1"));
+    private static final int PARALLEL_RUN_COUNT = Integer.parseInt(System.getProperty("ParallelRunCount", "5"));
+    private static final int SERIAL_RUN_COUNT = Integer.parseInt(System.getProperty("SerialRunCount", "5"));
 
     private static final int SMALL_COUNT = 100 * SCALE_FACTOR;
     private static final int MEDIUM_COUNT = 1000 * SCALE_FACTOR;
@@ -337,6 +337,7 @@ public class SerialParallelLazyPerformanceTest
     private void measureAlgorithmForIntegerIterable(String algorithmName, Procedure<Function0<FastList<Integer>>> algorithm, boolean shuffle)
     {
         this.printMachineAndTestConfiguration(algorithmName);
+        // NOTE: SHORTENING TEST
         for (int i = 0; i < 1; i++)
         {
             this.getSizes().forEach(Procedures.cast(count -> this.getIntegerListGenerators(count, shuffle).forEach(algorithm)));
@@ -363,6 +364,7 @@ public class SerialParallelLazyPerformanceTest
     private void measureAlgorithmForRandomStringIterable(String algorithmName, Procedure<Function0<UnifiedSet<String>>> algorithm)
     {
         this.printMachineAndTestConfiguration(algorithmName);
+        // NOTE: SHORTENING TEST
         for (int i = 0; i < 1; i++)
         {
             this.getSizes().forEach(Procedures.cast(count -> this.getRandomWordsGenerators(count).forEach(algorithm)));
