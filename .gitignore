@@ -75,3 +75,4 @@ fabric.properties
 .project
 .settings/
 .classpath
+jmh-results.*
