@@ -88,12 +88,12 @@ public class ParallelUnsafeMapIteratePutAcceptanceTest
         this.runAllPutTests(contents, constContents);
     }
     
-    @Param({"10", "50", "100", "500"})
+    @Param({"10", "50", "100", "500", "1000", "5000", "10000"})
     private int threads;
 
     private void runAllPutTests(Integer[] contents, Integer[] constContents)
     {
-        ExecutorService executorService = new ThreadPoolExecutor(threads, threads, 0, TimeUnit.SECONDS, new LinkedBlockingDeque<>(threads));
+        ExecutorService executorService = new ThreadPoolExecutor(threads, threads, 0, TimeUnit.SECONDS, new LinkedBlockingDeque<>(threads), Thread.ofVirtual().factory());
         this.runPutTest1(threads, contents, constContents, executorService, false);
         executorService.shutdown();
     }
