@@ -320,7 +320,6 @@ public class SerialParallelLazyPerformanceTest
         });
         return generators.shuffleThis();
     }
-    
     /* Runs all test methods except groupBy()
        Parameters of tests:
        Iterable size: 10,000 / 100,000 / 1,000,000 (from getSizes())
