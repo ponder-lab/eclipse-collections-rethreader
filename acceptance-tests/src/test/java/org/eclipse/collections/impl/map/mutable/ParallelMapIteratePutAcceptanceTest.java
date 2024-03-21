@@ -92,7 +92,7 @@ public class ParallelMapIteratePutAcceptanceTest
 
     private void runAllPutTests(Integer[] contents, Integer[] constContents)
     {
-        ExecutorService executorService = new ThreadPoolExecutor(threads, threads, 0, TimeUnit.SECONDS, new LinkedBlockingDeque<>(threads), Thread.ofVirtual().factory());
+        ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor();
         this.runPutTest1(threads, contents, constContents, executorService, false);
         executorService.shutdown();
     }
