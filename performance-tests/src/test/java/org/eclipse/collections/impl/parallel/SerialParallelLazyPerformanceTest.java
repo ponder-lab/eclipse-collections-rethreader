@@ -381,7 +381,7 @@ public class SerialParallelLazyPerformanceTest
         MutableList<Runnable> runnables = FastList.newList();
         runnables.add(() -> this.basicSerialForEachPerformance(collection, SERIAL_RUN_COUNT));
         int cores = Runtime.getRuntime().availableProcessors();
-        ExecutorService service = Executors.newFixedThreadPool(cores);
+        ExecutorService service = Executors.newVirtualThreadPerTaskExecutor();
         runnables.add(() -> {
             MutableMap<Integer, Boolean> map = new ConcurrentHashMap<>();
             this.basicParallelLazyForEachPerformance(collection, "Lambda", item -> map.put(item, Boolean.TRUE), PARALLEL_RUN_COUNT, cores, service);
@@ -420,7 +420,7 @@ public class SerialParallelLazyPerformanceTest
         MutableList<Runnable> runnables = FastList.newList();
         runnables.add(() -> this.basicSerialToListPerformance(collection, SERIAL_RUN_COUNT));
         int cores = Runtime.getRuntime().availableProcessors();
-        ExecutorService service = Executors.newFixedThreadPool(cores);
+        ExecutorService service = Executors.newVirtualThreadPerTaskExecutor();
         runnables.add(() -> this.basicParallelLazyToListPerformance(collection, PARALLEL_RUN_COUNT, cores, service));
         runnables.add(() -> this.basicJava8ParallelLazyToListPerformance(collection, PARALLEL_RUN_COUNT));
         List<Integer> arrayList = new ArrayList<>(collection);
@@ -442,7 +442,7 @@ public class SerialParallelLazyPerformanceTest
         MutableList<Runnable> runnables = FastList.newList();
         runnables.add(() -> this.basicSerialSelectPerformance(collection, PREDICATES_LAMBDA, SERIAL_RUN_COUNT));
         int cores = Runtime.getRuntime().availableProcessors();
-        ExecutorService service = Executors.newFixedThreadPool(cores);
+        ExecutorService service = Executors.newVirtualThreadPerTaskExecutor();
         runnables.add(() -> this.basicParallelLazySelectPerformance(collection, "Lambda", PREDICATES_LAMBDA, PARALLEL_RUN_COUNT, cores, service));
         runnables.add(() -> this.basicParallelLazySelectPerformance(collection, "Predicate", PREDICATES, PARALLEL_RUN_COUNT, cores, service));
         runnables.add(() -> this.basicParallelLazySelectPerformance(collection, "MethodRef", PREDICATES_METHOD_REF, PARALLEL_RUN_COUNT, cores, service));
@@ -468,7 +468,7 @@ public class SerialParallelLazyPerformanceTest
         MutableList<Runnable> runnables = FastList.newList();
         runnables.add(() -> this.basicSerialRejectPerformance(collection, PREDICATES_LAMBDA, SERIAL_RUN_COUNT));
         int cores = Runtime.getRuntime().availableProcessors();
-        ExecutorService service = Executors.newFixedThreadPool(cores);
+        ExecutorService service = Executors.newVirtualThreadPerTaskExecutor();
         runnables.add(() -> this.basicParallelLazyRejectPerformance(collection, "Lambda", PREDICATES_LAMBDA, PARALLEL_RUN_COUNT, cores, service));
         runnables.add(() -> this.basicParallelLazyRejectPerformance(collection, "Predicate", PREDICATES, PARALLEL_RUN_COUNT, cores, service));
         runnables.add(() -> this.basicParallelLazyRejectPerformance(collection, "MethodRef", PREDICATES_METHOD_REF, PARALLEL_RUN_COUNT, cores, service));
@@ -494,7 +494,7 @@ public class SerialParallelLazyPerformanceTest
         MutableList<Runnable> runnables = FastList.newList();
         runnables.add(() -> this.basicSerialAnySatisfyPerformance(collection, PREDICATES_LAMBDA.get(index), expectedResult, SERIAL_RUN_COUNT));
         int cores = Runtime.getRuntime().availableProcessors();
-        ExecutorService service = Executors.newFixedThreadPool(cores);
+        ExecutorService service = Executors.newVirtualThreadPerTaskExecutor();
         runnables.add(() -> this.basicParallelLazyAnySatisfyPerformance(collection, PREDICATES_LAMBDA.get(index), "Lambda", expectedResult, PARALLEL_RUN_COUNT, cores, service));
         runnables.add(() -> this.basicParallelLazyAnySatisfyPerformance(collection, PREDICATES.get(index), "Predicate", expectedResult, PARALLEL_RUN_COUNT, cores, service));
         runnables.add(() -> this.basicParallelLazyAnySatisfyPerformance(collection, PREDICATES_METHOD_REF.get(index), "MethodRef", expectedResult, PARALLEL_RUN_COUNT, cores, service));
@@ -520,7 +520,7 @@ public class SerialParallelLazyPerformanceTest
         MutableList<Runnable> runnables = FastList.newList();
         runnables.add(() -> this.basicSerialDetectPerformance(collection, PREDICATES_LAMBDA.get(index), expectedResult, SERIAL_RUN_COUNT));
         int cores = Runtime.getRuntime().availableProcessors();
-        ExecutorService service = Executors.newFixedThreadPool(cores);
+        ExecutorService service = Executors.newVirtualThreadPerTaskExecutor();
         runnables.add(() -> this.basicParallelLazyDetectPerformance(collection, PREDICATES_LAMBDA.get(index), "Lambda", expectedResult, PARALLEL_RUN_COUNT, cores, service));
         runnables.add(() -> this.basicParallelLazyDetectPerformance(collection, PREDICATES.get(index), "Predicate", expectedResult, PARALLEL_RUN_COUNT, cores, service));
         runnables.add(() -> this.basicParallelLazyDetectPerformance(collection, PREDICATES_METHOD_REF.get(index), "MethodRef", expectedResult, PARALLEL_RUN_COUNT, cores, service));
@@ -541,7 +541,7 @@ public class SerialParallelLazyPerformanceTest
         MutableList<Runnable> runnables = FastList.newList();
         runnables.add(() -> this.basicSerialCollectPerformance(collection, SERIAL_RUN_COUNT));
         int cores = Runtime.getRuntime().availableProcessors();
-        ExecutorService service = Executors.newFixedThreadPool(cores);
+        ExecutorService service = Executors.newVirtualThreadPerTaskExecutor();
         runnables.add(() -> this.basicParallelLazyCollectPerformance(collection, "Lambda", FUNCTIONS_LAMBDA, PARALLEL_RUN_COUNT, cores, service));
         runnables.add(() -> this.basicParallelLazyCollectPerformance(collection, "Function", FUNCTIONS, PARALLEL_RUN_COUNT, cores, service));
         runnables.add(() -> this.basicParallelLazyCollectPerformance(collection, "MethodRef", FUNCTIONS_METHOD_REF, PARALLEL_RUN_COUNT, cores, service));
@@ -567,7 +567,7 @@ public class SerialParallelLazyPerformanceTest
         MutableList<Runnable> runnables = FastList.newList();
         runnables.add(() -> this.basicSerialGroupByPerformance(words, SERIAL_RUN_COUNT));
         int cores = Runtime.getRuntime().availableProcessors();
-        ExecutorService service = Executors.newFixedThreadPool(cores);
+        ExecutorService service = Executors.newVirtualThreadPerTaskExecutor();
         runnables.add(() -> this.basicParallelLazyGroupByPerformance(words, "Lambda", ALPHAGRAM_LAMBDA, PARALLEL_RUN_COUNT, cores, service));
         runnables.add(() -> this.basicParallelLazyGroupByPerformance(words, "Function", ALPHAGRAM_FUNCTION, PARALLEL_RUN_COUNT, cores, service));
         runnables.add(() -> this.basicParallelLazyGroupByPerformance(words, "MethodRef", ALPHAGRAM_METHOD_REF, PARALLEL_RUN_COUNT, cores, service));

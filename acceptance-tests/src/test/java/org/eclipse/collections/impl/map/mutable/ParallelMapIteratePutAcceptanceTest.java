@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -91,7 +92,7 @@ public class ParallelMapIteratePutAcceptanceTest
 
     private void runAllPutTests(Integer[] contents, Integer[] constContents)
     {
-        ExecutorService executorService = new ThreadPoolExecutor(threads, threads, 0, TimeUnit.SECONDS, new LinkedBlockingDeque<>(threads));
+        ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor();
         this.runPutTest1(threads, contents, constContents, executorService, false);
         executorService.shutdown();
     }
