@@ -68,8 +68,8 @@ public class ParallelUnsafeMapIteratePutAcceptanceTest
     @Benchmark
     public void testMapIteratePut()
     {
-        int constSize = 100000;
-        int size = 10000000;
+        int constSize = 1000000;
+        int size = 100000000;
         Integer[] contents = new Integer[size];
         Integer[] constContents = new Integer[constSize];
         for (int i = 0; i < size; i++)
